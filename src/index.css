@@ -1,0 +1,108 @@
+@import "@fontsource/cinzel/400.css";
+@import "@fontsource/cinzel/600.css";
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/500-italic.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/jost/300.css";
+@import "@fontsource/jost/400.css";
+@import "@fontsource/jost/500.css";
+@import "@fontsource/jost/600.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream-50 text-moss-900 font-body antialiased;
+}
+
+::selection {
+  background: #c99a4b;
+  color: #161d0f;
+}
+
+/* visible keyboard focus, brand-toned */
+:focus-visible {
+  outline: 2px solid #c99a4b;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ————— shared component classes ————— */
+@layer components {
+  .container-nc {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold-500 px-7 py-3
+      font-body text-sm font-medium tracking-wide text-moss-950 transition
+      hover:bg-gold-400 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-moss-900/25 px-7 py-3
+      font-body text-sm font-medium tracking-wide text-moss-900 transition
+      hover:border-gold-600 hover:text-gold-700 active:scale-[0.98];
+  }
+  .btn-outline-light {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-cream-50/40 px-7 py-3
+      font-body text-sm font-medium tracking-wide text-cream-50 transition
+      hover:border-gold-400 hover:text-gold-300 active:scale-[0.98];
+  }
+  .eyebrow {
+    @apply font-body text-[11px] font-medium uppercase tracking-[0.28em] text-gold-600;
+  }
+  .field-label {
+    @apply mb-1.5 block font-body text-[13px] font-medium tracking-wide text-moss-800;
+  }
+  .field-input {
+    @apply w-full rounded-xl border border-moss-900/15 bg-white px-4 py-3 font-body text-[15px]
+      text-moss-900 placeholder:text-moss-900/35 transition
+      focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/25;
+  }
+  .card {
+    @apply rounded-2xl border border-moss-900/10 bg-white shadow-lift;
+  }
+}
+
+/* ————— entrance animations (respect reduced motion) ————— */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.anim-rise {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.anim-rise-1 { animation-delay: 0.08s; }
+.anim-rise-2 { animation-delay: 0.18s; }
+.anim-rise-3 { animation-delay: 0.3s; }
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.anim-toast { animation: toast-in 0.25s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-rise, .anim-toast { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* subtle paper grain on cream sections */
+.grain {
+  background-image: radial-gradient(rgba(33, 43, 24, 0.045) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
